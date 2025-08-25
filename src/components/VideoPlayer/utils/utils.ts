@@ -1,4 +1,4 @@
-export function getAverageVolume(dataArray: Uint8Array) {
-  const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length
-  return avg / 255 * 10 // нормируем 0-1
+export function getAverageVolume(dataArray: Uint8Array<ArrayBufferLike>) {
+  const avg = Array.from(dataArray).reduce((a, b) => a + b, 0) / dataArray.length
+  return Math.min(1, (avg / 255) * 10) // Вручную выбранное значение "10"
 }

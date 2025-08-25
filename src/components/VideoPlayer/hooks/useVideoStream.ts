@@ -48,7 +48,7 @@ export function useVideoStream({ isMuted, onBeforeRequest, onInit, onError }: Us
           if (!analyser || !dataArray) return
           analyser.getByteFrequencyData(dataArray)
           const avg = getAverageVolume(dataArray)
-          setVolume(Math.min(1, avg))
+          setVolume(avg)
           animationFrameId = requestAnimationFrame(updateVolume)
         }
 
