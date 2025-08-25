@@ -47,14 +47,13 @@ export default function VideoPlayer({ isMuted, onBeforeRequest, onInit, onError 
         source.connect(analyser)
         dataArray = new Uint8Array(analyser.fftSize)
 
-        const updateVolume = () => {
-          if (!analyser || !dataArray) return
-          analyser.getByteTimeDomainData(dataArray)
-          const normalized = dataArray.map((v) => Math.abs(v - 128) / 128)
-          const avg = normalized.reduce((a, b) => a + b, 0) / normalized.length
-          setVolume(avg)
-          animationFrameId = requestAnimationFrame(updateVolume)
-        }
+    	const updateVolume = () => {
+        if (!analyser || !dataArray) return
+        analyser.getByteFrequencyData(dataArray)
+        const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length
+        setVolume(Math.min(1, (avg / 255) * 10)) // нормируем 0-1
+        animationFrameId = requestAnimationFrame(updateVolume)
+      }
 
         updateVolume()
       } catch (e) {
