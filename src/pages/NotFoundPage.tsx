@@ -4,6 +4,15 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 
+const TEXTS = {
+	ERROR_CODE: "404",
+	ERROR_MESSAGE: "Oops! Page not found",
+	BUTTON_TEXT: "Go to tasks page",
+} as const
+
+/**
+ * Страница 404
+ */
 export default function NotFoundPage() {
 	return(
 		<Box
@@ -16,10 +25,10 @@ export default function NotFoundPage() {
       gap={2}
     >
       <Typography variant="h2" color="error" fontWeight="bold">
-        404
+        {TEXTS.ERROR_CODE}
       </Typography>
       <Typography variant="h5" color="text.secondary">
-        Oops! Page not found
+				{TEXTS.ERROR_MESSAGE}
       </Typography>
       <Button
         variant="contained"
@@ -28,7 +37,7 @@ export default function NotFoundPage() {
         to="/tasks"
         sx={{ mt: 2 }}
       >
-        Go to tasks page
+				{TEXTS.BUTTON_TEXT}
       </Button>
     </Box>
 	)
